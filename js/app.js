@@ -47,9 +47,22 @@ function init() {
 }
 init(); // Call the init function when the app loads.
 console.log(init, '<--- called the init function')
+
 // Call a function named render() at the end of the init() function.
 render();
 
+// Create a function called render, then set it aside for now.
+function render() {
+
+}
+
+// Create a function called updateBoard.
+function updateBoard() {
+    for (let i = 0; i < board.length; i++) {
+// ! Here is where I am stuck
+    }
+
+}
 /*----------------------------- Event Listeners -----------------------------*/
 // a function that 'listens' for a specific event to occur
 
