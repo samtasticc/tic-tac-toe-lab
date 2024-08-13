@@ -8,9 +8,9 @@
 // Use a variable named board to represent the state of the squares on the board.
 // Set the board variable to an array containing nine empty strings ('') representing empty squares.
 const board = [
-    '', '', '',
-    '', '', '',
-    '', '', '',
+    'X', '', '',
+    '', 'O', 'O',
+    'X', '', '',
 ];
 
 // Use a variable named turn to track whose turn it is.
@@ -32,7 +32,7 @@ let tie = false;
 // when you access an element in the DOM
 
 // In a constant called squareEls, store the nine elements representing the squares on the page.
-const squareEls = document.querySelector('.sqr')
+const squareEls = document.querySelectorAll('.sqr')
 
 
 // In a constant called messageEl, store the element that displays the game’s status on the page.
@@ -43,7 +43,7 @@ const messageEl = document.querySelector('#message')
 
 // Create a function called init.
 function init() {
-
+    updateBoard()
 }
 init(); // Call the init function when the app loads.
 console.log(init, '<--- called the init function')
@@ -59,7 +59,30 @@ function render() {
 // Create a function called updateBoard.
 function updateBoard() {
     for (let i = 0; i < board.length; i++) {
-// ! Here is where I am stuck
+        
+        // Using i you can iterate over the board array. try console.logging the board at index i
+        console.log(board[i], `board at index:${i}`);
+
+        // Then as i will be the same value on each iteration access the corresponding square in squareEls
+        console.log(squareEls[i], `squareEls at index: ${i}`)
+
+        // Based on the values of board, use if statements to assign the square its appropriate textContent
+        // if board[i] is "" then squareEls[i] textContent is ""
+        if (board[i] === '') {
+            // then assign empty string
+            squareEls[i].textContent = ''
+        }
+        // if board[i] is "X" then squareEls[i] textContent is "X"
+        if (board[i] === 'X') {
+            //then assign 'X'
+            squareEls[i].textContent = 'X'
+        }
+        // if board[i] is "O" then squareEls[i] textContent is "O"
+        if (board[i] === 'O') {
+            // then assign 'O'
+            squareEls[i].textContent = 'O'
+        }
+        // squareEls.forEach((element) => console.log(element));
     }
 
 }
@@ -67,9 +90,6 @@ function updateBoard() {
 // a function that 'listens' for a specific event to occur
 
 // ! Pseudocode
-//1) Define the required variables used to track the state of the game.
-
-//2) Store cached element references.
 
 //3) Upon loading, the game state should be initialized, and a function should be called to render this game state.
 
