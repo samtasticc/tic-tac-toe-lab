@@ -52,6 +52,7 @@ init(); // Call the init function when the app loads.
 render();
 
 // Create a function called render, then set it aside for now.
+// Invoke both the updateBoard and the updateMessage functions inside your render function.
 function render() {
     updateBoard()
     updateMessage()
@@ -96,7 +97,7 @@ function updateMessage() {
         // render whose turn it is.
         messageEl.textContent = `It's ${turn}'s turn`        
     // If winner is false, but tie is true, 
-    } if (winner === false && tie === true) {
+    } else if (winner === false && tie === true) {
         // render a tie message.    
         messageEl.textContent = "It's a tie!"
     // Otherwise, render a congratulatory message to the player that has won.
