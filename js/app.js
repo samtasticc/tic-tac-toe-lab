@@ -43,23 +43,24 @@ const messageEl = document.querySelector('#message')
 
 // Create a function called init.
 function init() {
-    updateBoard()
+    updateBoard() // <--- called the init function
 }
 init(); // Call the init function when the app loads.
-console.log(init, '<--- called the init function')
+// console.log(init, '<--- called the init function') // no ya didnt
 
 // Call a function named render() at the end of the init() function.
 render();
 
 // Create a function called render, then set it aside for now.
 function render() {
-
+    updateBoard()
+    updateMessage()
 }
 
 // Create a function called updateBoard.
 function updateBoard() {
     for (let i = 0; i < board.length; i++) {
-        
+
         // Using i you can iterate over the board array. try console.logging the board at index i
         console.log(board[i], `board at index:${i}`);
 
@@ -82,9 +83,26 @@ function updateBoard() {
             // then assign 'O'
             squareEls[i].textContent = 'O'
         }
-        // squareEls.forEach((element) => console.log(element));
     }
+    // squareEls.forEach((element) => {
+    //     console.log(element)
+    // });
 
+}
+
+function updateMessage() {
+    // If both winner and tie have a value of false (meaning the game is still in progress), 
+    if (winner && tie) {
+        // render whose turn it is.
+        messageEl.textContent = `It's ${turn}'s turn`        
+    // If winner is false, but tie is true, 
+    } if (winner === false && tie === true) {
+        // render a tie message.    
+        messageEl.textContent = "It's a tie!"
+    // Otherwise, render a congratulatory message to the player that has won.
+    } else {
+        messageEl.textContent = "Hey, you won!"
+    }
 }
 /*----------------------------- Event Listeners -----------------------------*/
 // a function that 'listens' for a specific event to occur
