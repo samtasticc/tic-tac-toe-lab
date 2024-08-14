@@ -1,6 +1,17 @@
 /*-------------------------------- Constants --------------------------------*/
 // values that cannot be reassigned once they are declared (const)
+// In a constant called winningCombos, define the eight possible winning combinations as an array of arrays.
 
+const winningCombos = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+]
 
 /*---------------------------- Variables (state) ----------------------------*/
 // containers for storing data (const, let)
