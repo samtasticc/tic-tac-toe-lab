@@ -21,15 +21,13 @@ const winningCombos = [
 // Set the board variable to an array containing nine empty strings ('') representing empty squares.
 const board = [
     '', '', '',
-    '', 'X', '',
-    '', '', 'O',
+    '', '', '',
+    '', '', '',
 ];
 
 // Use a variable named turn to track whose turn it is.
 // Set the turn to X - this will represent player X.
-const turn = (x) => {
-
-}
+let turn = 'X'
 
 // Use a variable named winner to represent if anyone has won yet.
 // Set the winner to false.
@@ -105,7 +103,7 @@ function updateBoard() {
 
 function updateMessage() {
     // If both winner and tie have a value of false (meaning the game is still in progress), 
-    if (winner && tie) {
+    if (winner === false && tie === false) {
         // render whose turn it is.
         messageEl.textContent = `It's ${turn}'s turn`
         // If winner is false, but tie is true, 
@@ -124,7 +122,7 @@ function handleClick(event) {
     const squareIndex = event.target.id
     // console.log(board[squareIndex])
     // If the board has a value of 'X' or 'O' at the squareIndex position
-    // board[0] => board[sqaureIndex]
+    // board[0] => board[squareIndex]
     if (board[squareIndex] === 'X' || board[squareIndex] === 'O') {
         // console.log('here')
         // immediately return out of handleClick
@@ -135,6 +133,41 @@ function handleClick(event) {
         return 
     }
     // console.log('you freakin did it')
+    
+    //  In the handleClick function, call the placePiece function you just created. Pass squareIndex to it as an argument.
+    placePiece(squareIndex)
+    render()
+}
+
+// Create a function named placePiece that accepts an index parameter.
+function placePiece(targetIndex) {
+    // Update the board array at the index so that it is equal to the current value of turn.
+    board[targetIndex] = turn
+    console.log(board)
+}
+
+
+
+
+
+
+// [0, 4, 8],
+// [2, 4, 6],
+
+// Create a function called checkForWinner.
+function checkForWinner() {
+    if (
+        (board[0] !== '' && board[0] === board[1] && board[0] === board[2]) ||
+        (board[3] !== '' && board[3] === board[4] && board[3] === board[5]) ||
+        (board[6] !== '' && board[6] === board[7] && board[6] === board[8]) ||
+        (board[0] !== '' && board[0] === board[3] && board[0] === board[6]) ||
+        (board[1] !== '' && board[1] === board[4] && board[1] === board[7]) ||
+        (board[2] !== '' && board[2] === board[5] && board[2] === board[8]) ||
+        (board[0] !== '' && board[0] === board[4] && board[0] === board[8]) ||
+        (board[2] !== '' && board[2] === board[4] && board[2] === board[6]) ||
+    ) {
+        winner = true
+    }
 }
 /*----------------------------- Event Listeners -----------------------------*/
 // a function that 'listens' for a specific event to occur
@@ -143,6 +176,7 @@ function handleClick(event) {
 squareEls.forEach(function (square) {
     square.addEventListener('click', handleClick);
 })
+
 
 // ! Pseudocode
 
