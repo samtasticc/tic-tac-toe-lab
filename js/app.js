@@ -136,6 +136,8 @@ function handleClick(event) {
     
     //  In the handleClick function, call the placePiece function you just created. Pass squareIndex to it as an argument.
     placePiece(squareIndex)
+    // In the handleClick function, call the checkForWinner function immediately after calling the placePiece function.
+    checkForWinner()
     render()
 }
 
@@ -145,14 +147,6 @@ function placePiece(targetIndex) {
     board[targetIndex] = turn
     console.log(board)
 }
-
-
-
-
-
-
-// [0, 4, 8],
-// [2, 4, 6],
 
 // Create a function called checkForWinner.
 function checkForWinner() {
@@ -164,10 +158,28 @@ function checkForWinner() {
         (board[1] !== '' && board[1] === board[4] && board[1] === board[7]) ||
         (board[2] !== '' && board[2] === board[5] && board[2] === board[8]) ||
         (board[0] !== '' && board[0] === board[4] && board[0] === board[8]) ||
-        (board[2] !== '' && board[2] === board[4] && board[2] === board[6]) ||
+        (board[2] !== '' && board[2] === board[4] && board[2] === board[6])
     ) {
-        winner = true
+        winner = true;
     }
+}
+
+// Create a function named checkForTie.
+function checkForTie() {
+    //Check if there is a winner. If there is, 
+    if (winner === true) {
+        // return out of the function.
+        return
+    }
+    // Check if the board array still contains any elements with a value of ''. 
+    board.forEach((square) => {
+        if (square === '') {
+            tie = false
+        } else {
+            tie === true
+        }
+    })
+    console.log(tie)
 }
 /*----------------------------- Event Listeners -----------------------------*/
 // a function that 'listens' for a specific event to occur
