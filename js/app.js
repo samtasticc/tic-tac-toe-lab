@@ -13,15 +13,16 @@ const winningCombos = [
     [2, 4, 6],
 ]
 
+
 /*---------------------------- Variables (state) ----------------------------*/
 // containers for storing data (const, let)
 
 // Use a variable named board to represent the state of the squares on the board.
 // Set the board variable to an array containing nine empty strings ('') representing empty squares.
 const board = [
-    'X', '', '',
-    '', 'O', 'O',
-    'X', '', '',
+    '', '', '',
+    '', 'X', '',
+    '', '', 'O',
 ];
 
 // Use a variable named turn to track whose turn it is.
@@ -106,28 +107,48 @@ function updateMessage() {
     // If both winner and tie have a value of false (meaning the game is still in progress), 
     if (winner && tie) {
         // render whose turn it is.
-        messageEl.textContent = `It's ${turn}'s turn`        
-    // If winner is false, but tie is true, 
+        messageEl.textContent = `It's ${turn}'s turn`
+        // If winner is false, but tie is true, 
     } else if (winner === false && tie === true) {
         // render a tie message.    
         messageEl.textContent = "It's a tie!"
-    // Otherwise, render a congratulatory message to the player that has won.
+        // Otherwise, render a congratulatory message to the player that has won.
     } else {
         messageEl.textContent = "Hey, you won!"
     }
 }
+
+// Create a function called handleClick. It will have an event parameter.
+function handleClick(event) {
+    // Obtain the index of the clicked square. To do this, get the index from an id assigned to the target element in the HTML. Assign this to a constant called squareIndex.
+    const squareIndex = event.target.id
+    // console.log(board[squareIndex])
+    // If the board has a value of 'X' or 'O' at the squareIndex position
+    // board[0] => board[sqaureIndex]
+    if (board[squareIndex] === 'X' || board[squareIndex] === 'O') {
+        // console.log('here')
+        // immediately return out of handleClick
+        return
+    // Also, if winner is true
+    } else if (winner === true) {
+        // immediately return out of handleClick because the game is over.
+        return 
+    }
+    // console.log('you freakin did it')
+}
 /*----------------------------- Event Listeners -----------------------------*/
 // a function that 'listens' for a specific event to occur
 
+// Add an event listener to each of the existing squareEls with a loop. Set up the event listener to respond to the 'click' event. The event listener should call the handleClick function you created in step 6a.
+squareEls.forEach(function (square) {
+    square.addEventListener('click', handleClick);
+})
+
 // ! Pseudocode
 
-//3) Upon loading, the game state should be initialized, and a function should be called to render this game state.
 
-//4) The state of the game should be rendered to the user.
 
-//5) Define the required constants.
 
-//6) Handle a player clicking a square with a `handleClick` function.
 
 //7) Create Reset functionality.
 
