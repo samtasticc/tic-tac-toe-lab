@@ -48,6 +48,9 @@ const squareEls = document.querySelectorAll('.sqr')
 // In a constant called messageEl, store the element that displays the game’s status on the page.
 const messageEl = document.querySelector('#message')
 
+// Store the new reset button element as a cached element reference in a constant named resetBtnEl.
+const resetBtnEl = document.querySelector('#reset')
+
 /*-------------------------------- Functions --------------------------------*/
 // reusuable blocks of code designed to perform a specific task
 
@@ -57,9 +60,6 @@ function init() {
 }
 init(); // Call the init function when the app loads.
 // console.log(init, '<--- called the init function') // no ya didnt
-
-// Call a function named render() at the end of the init() function.
-render();
 
 // Create a function called render, then set it aside for now.
 // Invoke both the updateBoard and the updateMessage functions inside your render function.
@@ -127,17 +127,21 @@ function handleClick(event) {
         // console.log('here')
         // immediately return out of handleClick
         return
-    // Also, if winner is true
+        // Also, if winner is true
     } else if (winner === true) {
         // immediately return out of handleClick because the game is over.
-        return 
+        return
     }
     // console.log('you freakin did it')
-    
+
     //  In the handleClick function, call the placePiece function you just created. Pass squareIndex to it as an argument.
     placePiece(squareIndex)
     // In the handleClick function, call the checkForWinner function immediately after calling the placePiece function.
     checkForWinner()
+    // In the handleClick function, call the checkForTie function immediately after calling the checkForWinner function.
+    checkForTie()
+    // In the handleClick function, call the switchPlayerTurn function immediately after calling the checkForTie function.
+    switchPlayerTurn()
     render()
 }
 
@@ -173,14 +177,44 @@ function checkForTie() {
     }
     // Check if the board array still contains any elements with a value of ''. 
     board.forEach((square) => {
+        // If it does, 
         if (square === '') {
+            // we can leave tie as false.
             tie = false
+            // Otherwise, 
         } else {
+            // tie should be set to true
             tie === true
         }
     })
+    // add a console log for tie after you’ve updated the tie state.
     console.log(tie)
 }
+
+// Create a function called switchPlayerTurn.
+
+function switchPlayerTurn() {
+    // If winner is true
+    if (winner === true) {
+        // return out of the function - we don’t need to switch the turn anymore because the person that just played won!
+        return        
+    // If winner is false,
+    } else {
+        // change the turn by checking the current value of turn.  If it is 'X' 
+        if(turn === 'X') {
+            // then change turn to 'O'. 
+            turn = 'O'
+        // If it is 'O' 
+        } else if (turn === 'O') {
+            // then change turn to 'X'.
+            turn = 'X'
+        }
+    }
+    // add a console log for turn after you’ve updated the turn state.
+    console.log(turn)
+}
+
+
 /*----------------------------- Event Listeners -----------------------------*/
 // a function that 'listens' for a specific event to occur
 
@@ -189,6 +223,9 @@ squareEls.forEach(function (square) {
     square.addEventListener('click', handleClick);
 })
 
+// Attach an event listener to the resetBtnEl. On the 'click' event, it should call the init function you created in step 3.
+
+resetBtnEl.addEventListener('click', handleClick)
 
 // ! Pseudocode
 
